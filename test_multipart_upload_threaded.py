@@ -30,9 +30,6 @@ def upload_file_multipart(bucket_name, file_path, file_name):
     )
 
     upload_id = create_response['UploadId']
-    
-    def _upload_chunk(chunk_data):
-        chunk_number, chunk = chunk_data
 
     
     for chunk_number, chunk in chunk_file(file_path):
