@@ -1,0 +1,24 @@
+{
+    "ResponseMetadata": {
+        "RequestId": "TXTYCEXA7S0MEZAF",
+        "HostId": "giXIlowPW45MwVJpzpg0JyPz/CaLD9t6LQW1cfTlz7qm8bjoExM/vQdS3UbFRlRJ9d+Rtjft6lzUqGFeLFJvwEm0E14DmTZc",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+            "x-amz-id-2": "giXIlowPW45MwVJpzpg0JyPz/CaLD9t6LQW1cfTlz7qm8bjoExM/vQdS3UbFRlRJ9d+Rtjft6lzUqGFeLFJvwEm0E14DmTZc",
+            "x-amz-request-id": "TXTYCEXA7S0MEZAF",
+            "date": "Thu, 27 Feb 2025 19:50:31 GMT",
+            "x-amz-server-side-encryption": "AES256",
+            "content-type": "application/xml",
+            "transfer-encoding": "chunked",
+            "server": "AmazonS3"
+        },
+        "RetryAttempts": 0
+    },
+    "ServerSideEncryption": "AES256",
+    "Location": "https://s3-playground-test.s3.amazonaws.com/file.dat",
+    "Bucket": "s3-playground-test",
+    "Key": "file.dat",
+    "ETag": "\"06a6b980ad8f82a50e9f056d26ab56ee-1024\"",
+    "ChecksumCRC64NVME": "ZTq3egHYPng=",
+    "ChecksumType": "FULL_OBJECT"
+}

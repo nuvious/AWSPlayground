@@ -1,9 +1,9 @@
+import concurrent.futures
 import json
 import os
 import sys
-import boto3
 
-from boto3.s3.transfer import TransferConfig
+import boto3
 
 def generate_file(file_path, size_in_gb):
     os.system(f"fallocate -l {1024 * 1024 * 1024 * size_in_gb} {file_path}")
@@ -30,7 +30,11 @@ def upload_file_multipart(bucket_name, file_path, file_name):
     )
 
     upload_id = create_response['UploadId']
+    
+    def _upload_chunk(chunk_data):
+        chunk_number, chunk = chunk_data
 
+    
     for chunk_number, chunk in chunk_file(file_path):
         response = s3_client.upload_part(
             Bucket=bucket_name,
@@ -40,10 +44,15 @@ def upload_file_multipart(bucket_name, file_path, file_name):
             Key=file_name,
             ChecksumAlgorithm='CRC64NVME'
         )
-        part_info['Parts'].append({
+        part = {
             'PartNumber': chunk_number,
             'ETag': response['ETag']
-        })
+        }
+        print(f"Completed part {part}", file=sys.stderr)
+        part_info['Parts'].append(part)
+
+    with open('parts.json', 'w', encoding='utf8') as f:
+        json.dump(part_info, f)
 
     result = s3_client.complete_multipart_upload(
         Bucket=bucket_name,
@@ -61,10 +70,10 @@ def main():
         sys.exit(1)
 
     bucket_name = sys.argv[1]
-    file_name = "1GB_file.dat"
+    file_name = "file.dat"
 
     file_path = f"/tmp/{file_name}"
-    generate_file(file_path, 1)
+    generate_file(file_path, 8)
 
     print(f"Uploading {file_name} to S3 bucket {bucket_name}")
     upload_file_multipart(bucket_name, file_path, file_name)

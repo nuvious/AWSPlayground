@@ -12,6 +12,7 @@ resource "aws_servicecatalogappregistry_application" "s3_playground" {
 # Create an S3 Bucket
 resource "aws_s3_bucket" "s3_playground_bucket" {
   bucket = "s3-playground-test"  # Ensure this bucket name is globally unique
+  force_destroy = true
 
   tags = {
     "Environment" = "Development"
